@@ -407,10 +407,10 @@ OLD和NEW不区分大小写
 CREATE INDEX index_user ON user(title)
 -- –修改表结构的方式添加索引
 ALTER TABLE table_name ADD INDEX index_name ON (column(length))
--- 给 user 表中的 name字段 添加普通索引(INDEX)
-ALTER TABLE `table` ADD INDEX index_name (name)
+-- 给 user 表中的 name 字段 添加普通索引(INDEX)
+ALTER TABLE `user` ADD INDEX index_name (name)
 -- –创建表的时候同时创建索引
-CREATE TABLE `table` (
+CREATE TABLE `user` (
     `id` int(11) NOT NULL AUTO_INCREMENT ,
     `title` char(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
     `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL ,
@@ -475,7 +475,7 @@ FROM mytable t LEFT JOIN mytable m ON t.Name=m.username
 WHERE m.age=20 AND m.city='上海';
 
 SELECT * FROM mytable WHERE username like'admin%'; -- 而下句就不会使用：
-SELECT * FROM mytable WHEREt Name like'%admin'; -- 因此，在使用LIKE时应注意以上的区别。
+SELECT * FROM mytable WHERE Name like'%admin'; -- 因此，在使用LIKE时应注意以上的区别。
 ```
 
 索引的注意事项
@@ -514,7 +514,7 @@ alter table students change name name char(16) not null;
 alter table students change name name char(16) COMMENT '这里是名字';
 -- 修改列属性的时候 建议使用modify,不需要重建表
 -- change用于修改列名字，这个需要重建表
-alter table meeting modify `weeks` varchar(20) NOT NULL DEFAULT "" COMMENT "开放日期 周一到周日：0~6，间隔用英文逗号隔开";
+alter table meeting modify `weeks` varchar(20) NOT NULL DEFAULT '' COMMENT '开放日期 周一到周日：0~6，间隔用英文逗号隔开';
 -- `user`表的`id`列，修改成字符串类型长度50，不能为空，`FIRST`放在第一列的位置
 alter table `user` modify COLUMN `id` varchar(50) NOT NULL FIRST ;
 ```
@@ -549,7 +549,7 @@ alter table students rename workmates;
 -- 清空表为 workmates 里面的数据，不删除表。 
 delete from workmates;
 -- 删除workmates表中的所有数据，且无法恢复
-truncate from workmates;
+truncate table workmates;
 ```
 
 ### 删除整张表
